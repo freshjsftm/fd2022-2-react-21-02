@@ -1,19 +1,16 @@
 import React, { Component } from "react";
 import "./App.css";
-import Ciao from './components/Ciao';
-const user = {
-  firstName:'Brad'
-}
+import Ciao from "./components/Ciao";
+import HeadingH1 from "./components/HeadingH1";
+
 class App extends Component {
   render() {
     return (
       <>
-        <h1 className="heading" title="123456">
-          Hi, React! {Math.random()}
-        </h1>
-        <Ciao classStyle="welcome" name={user.firstName} />
-        <Ciao classStyle="heading" name="Tom" isHi/>
-        <Ciao classStyle="welcome" name="Fred" isHi/>
+        <HeadingH1 className="heading" title="qwe" content="Hi, React!"/>
+        <Ciao classStyle="welcome" name="Brad" />
+        <Ciao classStyle="heading" name="Tom" />
+        <Ciao classStyle="welcome" name="Fred" />
         <Ciao classStyle="heading" />
       </>
     );

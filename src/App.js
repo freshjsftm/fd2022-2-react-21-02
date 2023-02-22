@@ -11,29 +11,47 @@ class App extends Component {
         { id: 7, firstName: "Tom", lastName: "Rot" },
         { id: 3, firstName: "Jon", lastName: "Snow" },
         { id: 12, firstName: "Fred", lastName: "Mercury" },
+        { id: 9, firstName: "Georg", lastName: "Clune" },
       ],
+      isDirectGrowthById: true,
+      isDirectGrowthByFirstName: true,
     };
   }
   sortById = () => {
-    //отримати масив з юзерами
-    const { users } = this.state;
-    //відсортувати юзерів не мутуючи наш стан
+    const { users, isDirectGrowthById } = this.state;
     const newUsers = [...users];
-    newUsers.sort((a, b) => a.id - b.id);
-    //const newUsers = JSON.parse(JSON.stringify(users));
-    //записати результат у стан
-    this.setState({ users: newUsers });
+    newUsers.sort((a, b) => (isDirectGrowthById ? a.id - b.id : b.id - a.id));
+    this.setState({ users: newUsers, isDirectGrowthById: !isDirectGrowthById });
+  };
+  sortByFirstName = () => {
+    const { users, isDirectGrowthByFirstName: direction } = this.state;
+    const newUsers = [...users];
+    newUsers.sort((a, b) => {
+      if (a.firstName > b.firstName) {
+        return direction ? 1 : -1;
+      }
+      if (a.firstName < b.firstName) {
+        return direction ? -1 : 1;
+      }
+      return 0;
+    });
+    this.setState({ users: newUsers, isDirectGrowthByFirstName: !direction });
   };
   render() {
-    const { users } = this.state;
+    const { users, isDirectGrowthById, isDirectGrowthByFirstName } = this.state;
     return (
       <>
-        <button onClick={this.sortById}>sort by id</button>
-        {users.map((user, index) => (
+        <button onClick={this.sortById}>
+          sort by id {isDirectGrowthById ? "growth" : "decrease"}
+        </button>
+        <button onClick={this.sortByFirstName}>
+          sort by first name {isDirectGrowthByFirstName ? "growth" : "decrease"}
+        </button>
+        {users.map((user) => (
           <Ciao
-            key={index}
+            key={user.id}
             id={user.id}
-            name={user.firstName}
+            name={user.firstName + " " + user.lastName}
             classStyle="welcome"
           />
         ))}

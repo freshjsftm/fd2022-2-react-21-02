@@ -13,14 +13,14 @@ class Ciao extends Component {
   };
   render() {
     const { isHi } = this.state;
-    const { classStyle, name, id } = this.props;
+    const { classStyle, name, id} = this.props;
     if(!isHi){
       return <p> id:{id} Bye, {name?? "anonim"}</p>
     }
     return (
       <article className={classStyle}>
-        <h2> id:{id} <br/>
-          {isHi ? "hi" : "bye"}, {name ?? "anonim"}
+        <h2> id:{id}) 
+          {isHi ? " hi" : " bye"}, {name ?? "anonim"}
         </h2>
         <button onClick={this.handleSwitch}>{isHi?'bye':'hi'}</button>
       </article>

@@ -8,6 +8,11 @@ class HeadingH1 extends Component {
         {content}
       </h1>
     );
+    // return React.createElement(
+    //   "h1",
+    //   { className: className, title: title },
+    //   content
+    // );
   }
 }
 

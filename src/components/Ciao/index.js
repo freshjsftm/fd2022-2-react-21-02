@@ -14,6 +14,9 @@ class Ciao extends Component {
   render() {
     const { isHi } = this.state;
     const { classStyle, name } = this.props;
+    if(!isHi){
+      return <p>Bye, {name?? "anonim"}</p>
+    }
     return (
       <article className={classStyle}>
         <h2>

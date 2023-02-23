@@ -70,7 +70,7 @@ class CiaoSection extends Component {
         <button onClick={this.sortByLastName}>
           sort by first name {isDirectGrowthByLastName ? "growth" : "decrease"}
         </button>
-        <CiaoList users={users}/>
+        <CiaoList users={users} />
       </>
     );
   }

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import UserCard from "../UserCard";
+import SelectedUsers from "./SelectedUsers";
+import UserList from "./UserList";
 const usersDB = [
   { id: 1, firstName: "Brad", lastName: "Pitt" },
   { id: 2, firstName: "Fred", lastName: "Rot" },
@@ -9,33 +10,25 @@ const usersDB = [
   { id: 6, firstName: "Alex", lastName: "Mail" },
 ];
 
-class UserList extends Component {
+class UserSection extends Component {
   constructor(props) {
     super(props);
     this.state = {
       users: usersDB.map((user) => ({ ...user, isSelected: false })),
     };
   }
-  userSelector = (id) => {
-    const { users } = this.state;
-    const newUsers = users.map((user) => ({
-      ...user,
-      isSelected: user.id === id ? !user.isSelected : user.isSelected,
-    }));
+  setUsersSelected = (newUsers) => {
     this.setState({ users: newUsers });
   };
-  mapUsers = (user) => (
-    <UserCard key={user.id} user={user} userSelector={this.userSelector} />
-  );
   render() {
     const { users } = this.state;
     return (
-      <section>
-        <h2>Users list</h2>
-        {users.map(this.mapUsers)}
-      </section>
+      <>
+        <SelectedUsers users={users} />
+        <UserList users={users} setUsersSelected={this.setUsersSelected} />
+      </>
     );
   }
 }
 
-export default UserList;
+export default UserSection;

@@ -7,14 +7,16 @@ class StopWatch extends Component {
       time: new Date(0, 0, 0, 0, 0, 0, 0),
     };
     this.idInterval = null;
-    console.log("constructor");
+    //console.log("constructor");
   }
 
   tick = () => {
-    const { time } = this.state;
-    const newTime = new Date(time.getTime());
-    newTime.setSeconds(newTime.getSeconds() + 1);
-    this.setState({ time: newTime });
+    this.setState((state, props) => {
+      const { time } = state;
+      const newTime = new Date(time.getTime());
+      newTime.setSeconds(newTime.getSeconds() + 1);
+      return { time: newTime };
+    });
   };
 
   start = () => {
@@ -34,19 +36,19 @@ class StopWatch extends Component {
   };
 
   componentDidMount() {
-    console.log("componentDidMount");
+    //console.log("componentDidMount");
     //this.start();
   }
   componentDidUpdate() {
-    console.log("componentDidUpdate");
+    //console.log("componentDidUpdate");
   }
   componentWillUnmount() {
     //clear side effects
-    console.log("componentWillUnmount");
+    //console.log("componentWillUnmount");
     this.stop();
   }
   render() {
-    console.log("render");
+    //console.log("render");
     const { time } = this.state;
 
     return (

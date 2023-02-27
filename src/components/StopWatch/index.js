@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import styles from "./StopWatch.module.css";
 
 class StopWatch extends Component {
   constructor(props) {
@@ -7,7 +8,6 @@ class StopWatch extends Component {
       time: new Date(0, 0, 0, 0, 0, 0, 0),
     };
     this.idInterval = null;
-    //console.log("constructor");
   }
 
   tick = () => {
@@ -36,15 +36,10 @@ class StopWatch extends Component {
   };
 
   componentDidMount() {
-    //console.log("componentDidMount");
-    //this.start();
   }
   componentDidUpdate() {
-    //console.log("componentDidUpdate");
   }
   componentWillUnmount() {
-    //clear side effects
-    //console.log("componentWillUnmount");
     this.stop();
   }
   render() {
@@ -52,11 +47,19 @@ class StopWatch extends Component {
     const { time } = this.state;
 
     return (
-      <article>
+      <article className={styles.container}>
         <h2>{time.toLocaleTimeString("en-GB")}</h2>
-        <button onClick={this.start}>start</button>
-        <button onClick={this.stop}>stop</button>
-        <button onClick={this.resume}>resume</button>
+        <div className={styles.controlBtn}>
+          <button className={styles.btn} onClick={this.start}>
+            start
+          </button>
+          <button className={styles.btn} onClick={this.stop}>
+            stop
+          </button>
+          <button className={styles.btn} onClick={this.resume}>
+            resume
+          </button>
+        </div>
       </article>
     );
   }

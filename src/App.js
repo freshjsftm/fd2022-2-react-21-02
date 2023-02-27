@@ -1,24 +1,13 @@
-import React, { Component } from "react";
+import React from "react";
 import "./App.css";
-import StopWatch from "./components/StopWatch";
+import SignInForm from "./components/forms/SignInForm";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isVisible:true
-    }
-  }
-  
-  render() {
-    const {isVisible} = this.state;
-    return (
-      <>
-        <button onClick={()=>{this.setState({isVisible:!isVisible})}}>switch</button>
-        {isVisible && <StopWatch />}
-      </>
-    );
-  }
-}
+const App = (props) => {
+  return (
+    <>
+      <SignInForm />
+    </>
+  );
+};
 
 export default App;

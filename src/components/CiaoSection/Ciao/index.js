@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import styles from './Ciao.module.css';
 
 class Ciao extends Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class Ciao extends Component {
     this.setState({ isHi: !isHi });
   };
   render() {
+    console.log(styles)
     const { isHi } = this.state;
     const { classStyle, name, id} = this.props;
     if(!isHi){
@@ -19,10 +21,10 @@ class Ciao extends Component {
     }
     return (
       <article className={classStyle}>
-        <h2> id:{id}) 
+        <h2 className={styles.container}> id:{id}) 
           {isHi ? " hi" : " bye"}, {name ?? "anonim"}
         </h2>
-        <button onClick={this.handleSwitch}>{isHi?'bye':'hi'}</button>
+        <button className={styles.btn} onClick={this.handleSwitch}>{isHi?'bye':'hi'}</button>
       </article>
     );
   }

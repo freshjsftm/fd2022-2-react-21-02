@@ -3,31 +3,38 @@ import styles from "./SignInForm.module.css";
 const initialState = {
   email: "",
   password: "",
+  emailValid: false,
+  passwordValid: false,
 };
 
 class SignInForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {...initialState};
+    this.state = { ...initialState };
   }
   handleSubmit = (event) => {
     event.preventDefault();
     const { target } = event;
     console.log(target.email.value);
     console.log(target.password.value);
-    this.setState({...initialState});
+    this.setState({ ...initialState });
   };
-  // handleEmail = ({ target: { value } })    => this.setState({ email: value });
-  // handlePassword = ({ target: { value } }) => this.setState({ password: value });
+
   handleInput = ({ target: { name, value } }) =>
-    this.setState({ [name]: value });
+    this.setState({ [name]: value, [name + "Valid"]: !value.includes(" ") });
 
   render() {
-    const { email, password } = this.state;
+    const { email, password, emailValid, passwordValid } = this.state;
+    const emailClassName = `${styles.input} ${
+      emailValid ? styles.valid : styles.invalid
+    }`;
+    const passwordClassName = `${styles.input} ${
+      passwordValid ? styles.valid : styles.invalid
+    }`;
     return (
       <form className={styles.container} onSubmit={this.handleSubmit}>
         <input
-          className={styles.input}
+          className={emailClassName}
           type="email"
           placeholder="email"
           name="email"
@@ -37,7 +44,7 @@ class SignInForm extends Component {
           onChange={this.handleInput}
         />
         <input
-          className={styles.input}
+          className={passwordClassName}
           type="password"
           placeholder="password"
           name="password"

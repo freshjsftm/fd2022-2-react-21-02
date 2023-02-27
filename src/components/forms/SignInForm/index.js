@@ -3,8 +3,8 @@ import styles from "./SignInForm.module.css";
 const initialState = {
   email: "",
   password: "",
-  emailValid: false,
-  passwordValid: false,
+  emailValid: true,
+  passwordValid: true,
 };
 
 class SignInForm extends Component {
@@ -25,12 +25,22 @@ class SignInForm extends Component {
 
   render() {
     const { email, password, emailValid, passwordValid } = this.state;
-    const emailClassName = `${styles.input} ${
-      emailValid ? styles.valid : styles.invalid
-    }`;
-    const passwordClassName = `${styles.input} ${
-      passwordValid ? styles.valid : styles.invalid
-    }`;
+    // const emailClassName = [styles.input];
+    // if (emailValid === false) {
+    //   emailClassName.push(styles.invalid);
+    // }
+    // const passwordClassName = [styles.input];
+    // if (passwordValid === false) {
+    //   passwordClassName.push(styles.invalid);
+    // }
+    const emailClassName = calcClassName({
+      [styles.input]: true,
+      [styles.invalid]: !emailValid
+    })
+    const passwordClassName = calcClassName({
+      [styles.input]: true,
+      [styles.invalid]: !passwordValid
+    })
     return (
       <form className={styles.container} onSubmit={this.handleSubmit}>
         <input
@@ -58,3 +68,20 @@ class SignInForm extends Component {
 }
 
 export default SignInForm;
+
+function calcClassName(objectClasses) {
+  return Object.entries(objectClasses)
+    .filter(([nameClass, condition]) => condition)
+    .map(([nameClass, condition]) => nameClass)
+    .join(" ");
+}
+
+/*
+objectClasses = {
+  nameClass: condition,
+  nameClass: condition,
+  nameClass: condition,
+}
+
+
+*/

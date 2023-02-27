@@ -9,9 +9,9 @@
   padding: 0.5em;
   margin-top: 10px;
 }
-.valid{
+/* .valid{
   border: 2px solid teal;
-}
+} */
 .invalid{
   border: 2px solid red;
 }

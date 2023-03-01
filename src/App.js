@@ -1,11 +1,16 @@
 import React from "react";
 import "./App.css";
-import SignInForm from "./components/forms/SignInForm";
+import Ciao from "./components/CiaoSection/Ciao";
 
 const App = (props) => {
+  const user = {
+    id:1,
+    firstName:'Brad',
+    lastName: 'Pitt'
+  }
   return (
     <>
-      <SignInForm />
+      <Ciao classStyle={'welcome'} name={user.firstName} id={user.id}/>
     </>
   );
 };

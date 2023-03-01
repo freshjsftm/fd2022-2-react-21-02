@@ -1,21 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styles from "./Ciao.module.css";
-/**
- *
- * @param {*} props
- * @param {string} props.classStyle
- * @param {string} props.name
- * @param {number} props.id
- */
+
 class Ciao extends Component {
-  /**
-   *
-   * @param {*} props
-   * @param {string} props.classStyle
-   * @param {string} props.name
-   * @param {number} props.id
-   */
   constructor(props) {
     super(props);
     this.state = {
@@ -29,10 +16,6 @@ class Ciao extends Component {
   render() {
     const { isHi } = this.state;
     const { classStyle, name, id } = this.props;
-    // bad practice!
-    // if(typeof name !== "string"){
-    //   console.error('type must be staring')
-    // }
     if (!isHi) {
       return (
         <p>

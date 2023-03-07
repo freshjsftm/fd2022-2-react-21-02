@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import { getRandomUsers } from "../../api";
+import Spinner from "../Spinner";
+import Error from "../Error";
+import UsersList from "./UsersList";
+import Paginate from "../Paginate";
 
 class UsersLoader extends Component {
   constructor(props) {
@@ -14,7 +18,7 @@ class UsersLoader extends Component {
   load = () => {
     const { currentPage } = this.state;
     this.setState({ isPending: true });
-    getRandomUsers({page:currentPage})
+    getRandomUsers({ page: currentPage })
       .then((data) => this.setState({ users: data.results }))
       .catch((error) => this.setState({ error }))
       .finally(() => this.setState({ isPending: false }));
@@ -27,7 +31,7 @@ class UsersLoader extends Component {
       this.load();
     }
   }
-  mapUsers = (user) => <li key={user.login.uuid}>{user.email}</li>;
+
   handlePrevBtn = () => {
     if (this.state.currentPage > 1) {
       this.setState((state) => ({ currentPage: state.currentPage - 1 }));
@@ -38,20 +42,20 @@ class UsersLoader extends Component {
   render() {
     const { users, isPending, error, currentPage } = this.state;
     if (error) {
-      return <h3>Error!</h3>;
+      return <Error />;
     }
     if (isPending) {
-      return <h3>Loading...</h3>;
+      return <Spinner />;
     }
     return (
       <section>
         <h2>Users List</h2>
-        <div>
-          <button onClick={this.handlePrevBtn}>prev &lt; </button>
-          <strong> {currentPage} </strong>
-          <button onClick={this.handleNextBtn}> &gt; next</button>
-        </div>
-        <ul>{users.map(this.mapUsers)}</ul>
+        <Paginate
+          currentPage={currentPage}
+          handlePrevBtn={this.handlePrevBtn}
+          handleNextBtn={this.handleNextBtn}
+        />
+        <UsersList users={users} />
       </section>
     );
   }

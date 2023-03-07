@@ -4,6 +4,8 @@ import Spinner from "../Spinner";
 import Error from "../Error";
 import UsersList from "./UsersList";
 import Paginate from "../Paginate";
+import { configRandomUser } from "../../configs";
+import ControlAmount from "./ControlAmount";
 
 class UsersLoader extends Component {
   constructor(props) {
@@ -13,13 +15,20 @@ class UsersLoader extends Component {
       isPending: false,
       error: null,
       currentPage: 1,
+      currentResult: configRandomUser.AMOUNT,
     };
   }
   load = () => {
-    const { currentPage } = this.state;
+    const { currentPage, currentResult } = this.state;
     this.setState({ isPending: true });
-    getRandomUsers({ page: currentPage })
-      .then((data) => this.setState({ users: data.results }))
+    getRandomUsers({ page: currentPage, results: currentResult })
+      .then((data) => {
+        console.log(data);
+        if (data.error) {
+          return this.setState({ error: data.error });
+        }
+        this.setState({ users: data.results, error: null });
+      })
       .catch((error) => this.setState({ error }))
       .finally(() => this.setState({ isPending: false }));
   };
@@ -27,7 +36,11 @@ class UsersLoader extends Component {
     this.load();
   }
   componentDidUpdate(prevProps, prevState) {
-    if (this.state.currentPage !== prevState.currentPage) {
+    const { currentPage, currentResult } = this.state;
+    if (
+      currentPage !== prevState.currentPage ||
+      currentResult !== prevState.currentResult
+    ) {
       this.load();
     }
   }
@@ -39,8 +52,10 @@ class UsersLoader extends Component {
   };
   handleNextBtn = () =>
     this.setState((state) => ({ currentPage: state.currentPage + 1 }));
+
+  setResults = (value) => this.setState({ currentResult: value });
   render() {
-    const { users, isPending, error, currentPage } = this.state;
+    const { users, isPending, error, currentPage, currentResult } = this.state;
     if (error) {
       return <Error />;
     }
@@ -50,6 +65,18 @@ class UsersLoader extends Component {
     return (
       <section>
         <h2>Users List</h2>
+
+        {/* homework!!! */}
+        {/* додати селект з вибором національності
+        ['AU', 'BR', 'CA', 'CH', 'DE', 'DK', 'ES', 'FI', 'FR', 'GB', 'IE', 'IR', 'NL', 'NZ', 'TR', 'US'] */}
+        {/* додати чекбокс з вибором статі */}
+        {/* homework!!! */}
+
+        <ControlAmount
+          amounts={configRandomUser.AMOUNTS}
+          currentResult={currentResult}
+          setResults={this.setResults}
+        />
         <Paginate
           currentPage={currentPage}
           handlePrevBtn={this.handlePrevBtn}

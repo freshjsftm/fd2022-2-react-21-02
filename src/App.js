@@ -1,11 +1,18 @@
 import React from "react";
-import { BrowserRouter, Route, Routes, NavLink } from "react-router-dom";
+import { BrowserRouter, Route, Routes, NavLink, Outlet } from "react-router-dom";
 import "./App.css";
+import HomePage from "./pages/HomePage";
+import StopWatchPages from "./pages/StopWatchPages";
+import CiaoSection from "./components/CiaoSection";
+import UserSection from "./components/UserSection";
+import NotFoundPage from "./pages/NotFoundPage";
 
-const Home = ()=> <h1>Home</h1>;
-const About = ()=> <h1>About</h1>;
-const Contacts = ()=> <h1>Contacts</h1>;
-const NotFound = ()=> <h1>404</h1>;
+const Section = () => {
+  return <>
+    <h1>Common part</h1>
+    <Outlet />
+  </>
+}
 
 const App = (props) => {
   return (
@@ -14,16 +21,25 @@ const App = (props) => {
     <nav>
       <ul>
         <li><NavLink to='/'>home</NavLink></li>
-        <li><NavLink to='/about'>about</NavLink></li>
-        <li><NavLink to='/contacts'>contacts</NavLink></li>
+        <li><NavLink to='/stop-watch'>stop-watch</NavLink></li>
+        <li>Section:
+          <ul>
+          <li><NavLink to='/section/ciao'>ciao</NavLink></li>
+          <li><NavLink to='/section/user'>user</NavLink></li>
+          </ul>
+        </li>
       </ul>
     </nav>
       <Routes>
-        <Route path="/" element={<Home />}/>
-        <Route path="/about" element={<About />}/>
-        <Route path="/contacts" element={<Contacts />}/>
-        <Route path="*" element={<NotFound />}/>
+        <Route path="/" element={<HomePage />}/>
+        <Route path="/stop-watch" element={<StopWatchPages />} />
+        <Route path="/section/" element={<Section />}>
+          <Route path="ciao" element={<CiaoSection />}/>
+          <Route path="user" element={<UserSection />}/>
+        </Route>
+        <Route path="*" element={<NotFoundPage />}/>
       </Routes>
+      <footer>2023</footer>
     </BrowserRouter>
   </>
   );

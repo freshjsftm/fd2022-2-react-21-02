@@ -1,7 +1,7 @@
-import React, { Component, PureComponent } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-class Counter extends PureComponent {
+class Counter extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,9 +14,9 @@ class Counter extends PureComponent {
   handleSub = () => {
     this.setState((state, props) => ({ count: state.count - props.step }));
   };
-  // shouldComponentUpdate(nextProps, nextState){
-  //   return nextProps.step === this.props.step;
-  // }
+  shouldComponentUpdate(nextProps, nextState){
+    return nextProps.step === this.props.step;
+  }
   render() {
     const { count } = this.state;
     const styles = {

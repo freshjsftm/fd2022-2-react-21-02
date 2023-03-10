@@ -9,13 +9,17 @@ class Counter extends Component {
     };
   }
   handleAdd = () => {
-    this.setState((state, props) => ({ count: state.count + props.step }));
+    this.setState((state, props) => ({
+      count: state.count + Number(props.step),
+    }));
   };
   handleSub = () => {
-    this.setState((state, props) => ({ count: state.count - props.step }));
+    this.setState((state, props) => ({
+      count: state.count - Number(props.step),
+    }));
   };
-  shouldComponentUpdate(nextProps, nextState){
-    return nextProps.step === this.props.step;
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextProps.step === this.props.step && nextProps.text === this.props.text;
   }
   render() {
     const { count } = this.state;
@@ -27,13 +31,13 @@ class Counter extends Component {
       backgroundColor: "pink",
       textAlign: "center",
     };
-    console.log('render')
+    console.log("render");
     return (
       <section style={styles}>
         <h3>count:{count}</h3>
         <button onClick={this.handleAdd}>+</button>
         <button onClick={this.handleSub}>-</button>
-        <button onClick={()=>console.log(count)}>click me</button>
+        <button onClick={() => console.log(count)}>click me</button>
       </section>
     );
   }

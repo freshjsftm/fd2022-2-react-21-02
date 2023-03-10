@@ -22,14 +22,14 @@ class LoaderData extends Component {
     this.load();
   }
   render() {
-    const { render } = this.props;
-    return render(this.state);
+    const { children } = this.props;
+    return children(this.state);
   }
 }
 
 LoaderData.propTypes = {
   loadData: PropTypes.func,
-  render: PropTypes.func.isRequired,
+  children: PropTypes.func.isRequired,
 };
 
 export default LoaderData;

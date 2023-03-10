@@ -6,6 +6,7 @@ import StopWatchPages from "./pages/StopWatchPages";
 import CiaoSection from "./components/CiaoSection";
 import UserSection from "./components/UserSection";
 import NotFoundPage from "./pages/NotFoundPage";
+import CounterPage from "./pages/CounterPage";
 
 const Section = () => {
   return <>
@@ -21,6 +22,7 @@ const App = (props) => {
     <nav>
       <ul>
         <li><NavLink to='/'>home</NavLink></li>
+        <li><NavLink to='/counter'>counter</NavLink></li>
         <li><NavLink to='/stop-watch'>stop-watch</NavLink></li>
         <li>Section:
           <ul>
@@ -32,6 +34,7 @@ const App = (props) => {
     </nav>
       <Routes>
         <Route path="/" element={<HomePage />}/>
+        <Route path="/counter" element={<CounterPage />}/>
         <Route path="/stop-watch" element={<StopWatchPages />} />
         <Route path="/section/" element={<Section />}>
           <Route path="ciao" element={<CiaoSection />}/>

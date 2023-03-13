@@ -1,18 +1,31 @@
-import React, { Component } from "react";
-import { UserContext, OtherContext } from "../../contexts";
-import styles from './Header.module.scss';
+import React from "react";
+import cx from "classnames";
+import { UserContext, ThemeContext } from "../../contexts";
+import styles from "./Header.module.scss";
+import CONSTANTS from "../../constants";
+const {THEMES} = CONSTANTS;
 
-class Header extends Component {
-  render() {
-    const {firstName} = this.context;
-    return <header className={styles.header}>
-      <h1>logo</h1>
-      <div>Hi, {firstName}</div>
-    </header>;
-  }
-}
-
-Header.contextType = UserContext;
-//Header.contextType = OtherContext;
+const Header = () => {
+  return (
+    <ThemeContext.Consumer>
+      {(theme) => {
+        const headerClasses = cx(styles.header, {
+          [styles.light] : theme === THEMES.LIGHT,
+          [styles.dark] : theme === THEMES.DARK
+        })
+        return (
+          <UserContext.Consumer>
+            {({ firstName }) => (
+              <header className={headerClasses}>
+                <h1>logo</h1>
+                <div>Hi, {firstName}</div>
+              </header>
+            )}
+          </UserContext.Consumer>
+        );
+      }}
+    </ThemeContext.Consumer>
+  );
+};
 
 export default Header;

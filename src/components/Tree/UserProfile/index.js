@@ -1,19 +1,34 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { UserContext } from "../../../contexts";
+import cx from "classnames";
+import { UserContext, ThemeContext } from "../../../contexts";
 import styles from "./UserProfile.module.scss";
+import CONSTANTS from "../../../constants";
+const {THEMES} = CONSTANTS;
 
 const UserProfile = (props) => {
-  const viewUser = ({ id, firstName, lastName }) => (
-    <article className={styles.article}>
-      <h3>
-        <em>{id}) </em>
-        {firstName} {lastName}
-      </h3>
-    </article>
+  return (
+    <ThemeContext.Consumer>
+      {(theme) => {
+        const articleClasses = cx(styles.article, {
+          [styles.light] : theme === THEMES.LIGHT,
+          [styles.dark] : theme === THEMES.DARK
+        })
+        return (
+          <UserContext.Consumer>
+            {({ id, firstName, lastName }) => (
+              <article className={articleClasses}>
+                <h3>
+                  <em>{id}) </em>
+                  {firstName} {lastName}
+                </h3>
+              </article>
+            )}
+          </UserContext.Consumer>
+        );
+      }}
+    </ThemeContext.Consumer>
   );
-
-  return <UserContext.Consumer>{viewUser}</UserContext.Consumer>;
 };
 
 UserProfile.defaultProps = {

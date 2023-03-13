@@ -1,13 +1,22 @@
-
-%one-line{
+%one-line {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.flex-column{
+.flex-column {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+%light {
+  background-color: wheat;
+  color: #222;
+}
+
+%dark {
+  color: wheat;
+  background-color: #222;
 }

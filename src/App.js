@@ -18,11 +18,11 @@ class App extends Component {
       theme: THEMES.LIGHT
     };
   }
-
+  setTheme = (theme) => {this.setState({theme})}
   render() {
     const { user, theme } = this.state;
     return (
-      <ThemeContext.Provider value={theme}>
+      <ThemeContext.Provider value={[theme, this.setTheme]}>
         <UserContext.Provider value={user}>
           <Header />
           <Tree />

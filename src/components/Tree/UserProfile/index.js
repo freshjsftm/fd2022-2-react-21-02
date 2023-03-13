@@ -9,7 +9,7 @@ const {THEMES} = CONSTANTS;
 const UserProfile = (props) => {
   return (
     <ThemeContext.Consumer>
-      {(theme) => {
+      {([theme]) => {
         const articleClasses = cx(styles.article, {
           [styles.light] : theme === THEMES.LIGHT,
           [styles.dark] : theme === THEMES.DARK

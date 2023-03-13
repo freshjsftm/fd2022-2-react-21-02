@@ -7,7 +7,7 @@ const { THEMES } = CONSTANTS;
 const Parent = (props) => {
   return (
     <ThemeContext.Consumer>
-      {(theme) => {
+      {([theme]) => {
         return (
           <div
             style={{

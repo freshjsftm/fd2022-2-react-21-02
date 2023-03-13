@@ -20,6 +20,7 @@ const Header = () => {
             {({ firstName }) => (
               <header className={headerClasses}>
                 <h1>logo</h1>
+                {/* translate  hi */}
                 <div>Hi, {firstName}</div>
                 <span
                   onClick={() => {

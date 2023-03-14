@@ -1,35 +1,18 @@
-import React, { Component } from "react";
+import React from "react";
 import "./App.css";
-import Header from "./components/Header";
-import Tree from "./components/Tree";
-import { UserContext, ThemeContext } from "./contexts";
-import CONSTANTS from "./constants";
-const {THEMES} = CONSTANTS;
+import { SIGN_UP_SCHEMA } from "./utils/validationSchemas";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      user: {
-        id: 1,
-        firstName: "Brad",
-        lastName: "Pitt",
-      },
-      theme: THEMES.LIGHT
-    };
-  }
-  setTheme = (theme) => {this.setState({theme})}
-  render() {
-    const { user, theme } = this.state;
-    return (
-      <ThemeContext.Provider value={[theme, this.setTheme]}>
-        <UserContext.Provider value={user}>
-          <Header />
-          <Tree />
-        </UserContext.Provider>
-      </ThemeContext.Provider>
-    );
-  }
-}
+const App = () => {
+  const user = {
+    firstName: "Brad",
+    lastName: "Pitt",
+    email: "pitt@gmail.com",
+    password: "gr3at@3wdsG",
+    age: 59,
+    isMale: true,
+  };
+  console.log(SIGN_UP_SCHEMA.validate(user));
+  return null;
+};
 
 export default App;

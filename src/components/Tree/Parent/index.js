@@ -1,7 +1,7 @@
 import React from "react";
 import SubParent from "../SubParent";
 import CONSTANTS from "../../../constants";
-import { WithTheme } from "../../HOC";
+import { WithTheme } from "../../HOCs";
 const { THEMES } = CONSTANTS;
 
 const Parent = (props) => {

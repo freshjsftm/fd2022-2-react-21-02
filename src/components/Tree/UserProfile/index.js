@@ -1,29 +1,27 @@
 import React from "react";
 import PropTypes from "prop-types";
 import cx from "classnames";
-import { WithTheme } from "./../../HOC";
-import { UserContext} from "../../../contexts";
+import { WithTheme, WithUser } from "../../HOCs";
 import styles from "./UserProfile.module.scss";
 import CONSTANTS from "../../../constants";
 const { THEMES } = CONSTANTS;
 
 const UserProfile = (props) => {
-  const { theme } = props;
+  const {
+    theme,
+    user: { id, firstName, lastName },
+  } = props;
   const articleClasses = cx(styles.article, {
     [styles.light]: theme === THEMES.LIGHT,
     [styles.dark]: theme === THEMES.DARK,
   });
   return (
-    <UserContext.Consumer>
-      {({ id, firstName, lastName }) => (
-        <article className={articleClasses}>
-          <h3>
-            <em>{id}) </em>
-            {firstName} {lastName}
-          </h3>
-        </article>
-      )}
-    </UserContext.Consumer>
+    <article className={articleClasses}>
+      <h3>
+        <em>{id}) </em>
+        {firstName} {lastName}
+      </h3>
+    </article>
   );
 };
 
@@ -42,4 +40,4 @@ export const userShape = PropTypes.shape({
 UserProfile.propTypes = {
   user: userShape.isRequired,
 };
-export default WithTheme(UserProfile);
+export default WithUser(WithTheme(UserProfile));

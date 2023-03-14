@@ -9,9 +9,9 @@ const App = () => {
     email: "pitt@gmail.com",
     password: "gr3at@3wdsG",
     age: 59,
-    isMale: true,
+    //male: 'male', //male|female
   };
-  console.log(SIGN_UP_SCHEMA.validate(user));
+  console.log(SIGN_UP_SCHEMA.validate(user).then((data) => console.log(data)).catch((error) => console.log(error)));
   return null;
 };
 

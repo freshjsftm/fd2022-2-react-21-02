@@ -22,7 +22,7 @@ export const SIGN_UP_SCHEMA = Yup.object({
   email: EMAIL_SCHEMA,
   password:PASSWORD_SCHEMA,
   age: Yup.number().min(14).max(150).required("Must required"),
-  isMale: Yup.boolean().required("Must required"),
+  male: Yup.string().default('female').oneOf(['male','female'], 'Must be one of male or female'),
 });
 
 export const SIGN_IN_SCHEMA = Yup.object({

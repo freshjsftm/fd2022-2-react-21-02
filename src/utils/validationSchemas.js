@@ -7,7 +7,7 @@ export const NAME_SCHEMA = Yup.string()
   .matches(/^[A-Z][a-z]{2,16}$/, "Must be lattin letter in format like Brad")
   .required("Must required");
 
-export const EMAIL_SCHEMA =   Yup.string().trim().email("Must include @").required("Must required")
+export const EMAIL_SCHEMA =   Yup.string().trim().email("Must include @").required("Must required!!!")
 
 export const PASSWORD_SCHEMA =  Yup.string()
     .matches(

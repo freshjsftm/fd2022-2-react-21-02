@@ -1,27 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const LearnHooks = (props) => {
-  const [state, setState] = useState({ x: 0, y: 0, amount: 0 });
-  const handleMove = (event) => {
-    setState({
-      ...state,
-      x: event.clientX,
-      y: event.clientY,
-    });
-  };
-  const handleClick = () => {
-    setState({
-      ...state,
-      amount: state.amount+1
-    })
-  }
+  const [amount, setAmount] = useState(0);
+  const [step, setStep] = useState(5);
+  const handleStep = ({target:{value}}) => {setStep(Number(value))}
+  useEffect(()=>{
+    console.log('effect')
+    const handleClick = () => {
+      setAmount((prevAmount)=>prevAmount + step);
+    };
+    document.body.addEventListener("click", handleClick);
+    return ()=>{
+      console.log('clear effect')
+      document.body.removeEventListener("click", handleClick);
+    }
+  }, [step]);
+  //
+  useEffect(()=>{
+    //effect
+    return ()=>{
+      //clear effect
+    }
+  }, [])
   return (
-    <div onMouseMove={handleMove} style={{ backgroundColor: "pink" }} onClick={handleClick}>
-      <p>coord x:{state.x}</p>
-      <p>coord y:{state.y}</p>
-      <p>amount:{state.amount}</p>
+    <div style={{ backgroundColor: "pink" }}>
+      <p>amount click: {amount}</p>
+      <p><input value={step} onChange={handleStep}/></p>
     </div>
   );
 };
-
+//onClick={handleClick} 
 export default LearnHooks;

@@ -1,15 +1,26 @@
 import React, { useState } from "react";
-import "./App.css";
-import LearnHooks from "./components/LearnHooks";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import { UserContext } from "./contexts";
+import Header from "./components/Header";
 
 const App = () => {
-  const [isVisible, setIsVisible] = useState(true);
-  const handleClick = ()=>{setIsVisible(!isVisible)}
+  const [user] = useState({
+    id: 4,
+    firstName: "Brad",
+    lastName: "Pitt",
+  });
+  //state for theme
   return (
-    <>
-      <button onClick={handleClick}>switch visibility</button>
-      {isVisible && <LearnHooks />}
-    </>
+    //wrapping provider theme
+    <UserContext.Provider value={user}>
+      <BrowserRouter>
+        {/* <Header /> */}
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+        </Routes>
+      </BrowserRouter>
+    </UserContext.Provider>
   );
 };
 

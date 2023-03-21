@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
-import { UserContext } from "./contexts";
-import Header from "./components/Header";
+import { UserContext, ThemeContext } from "./contexts";
+import CONSTANTS from "./constants";
+const {THEMES} = CONSTANTS;
 
 const App = () => {
   const [user] = useState({
@@ -10,17 +11,17 @@ const App = () => {
     firstName: "Brad",
     lastName: "Pitt",
   });
-  //state for theme
+  const [theme, setTheme] = useState(THEMES.LIGHT);
   return (
-    //wrapping provider theme
-    <UserContext.Provider value={user}>
-      <BrowserRouter>
-        {/* <Header /> */}
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-        </Routes>
-      </BrowserRouter>
-    </UserContext.Provider>
+    <ThemeContext.Provider value={[theme, setTheme]}>
+      <UserContext.Provider value={user}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+          </Routes>
+        </BrowserRouter>
+      </UserContext.Provider>
+    </ThemeContext.Provider>
   );
 };
 

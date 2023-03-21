@@ -1,8 +1,10 @@
-import React, { useContext, useState, useEffect, useCallback, useMemo } from "react";
+import React, { useContext, useState, useCallback, useMemo } from "react";
 import { ThemeContext } from "../contexts";
 import Calendar from "../components/Calendar";
 import UserProfile from "../components/UserProfile";
+import FuncUsersList from "../components/FuncUsersList";
 import CONSTANTS from "../constants";
+
 const { THEMES } = CONSTANTS;
 const calcSense = (n) => {
   let sum = 0;
@@ -32,14 +34,16 @@ const HomePage = (props) => {
   const handleBtnLog = useCallback(() => {
     console.log(sense);
   }, [sense]);
-  useEffect(() => {
-    console.log("created function handleValue");
-  }, [handleValue]);
+
+  // useEffect(() => {
+  //   console.log("created function handleValue");
+  // }, [handleValue]);
 
   const memoCalcSense = useMemo(()=>calcSense(sense), [sense])
   return (
     <section style={inlineStyle}>
       <button onClick={handleTheme}>{isLight ? "dark" : "light"}</button>
+      <FuncUsersList />
       <Calendar />
       <UserProfile />
       <h3>{memoCalcSense}</h3>

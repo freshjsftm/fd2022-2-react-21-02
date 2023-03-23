@@ -2,7 +2,7 @@ import React from "react";
 import Spinner from "../Spinner";
 import Error from "../Error";
 import { getJsonUsers } from "../../api";
-import useData from "../../hooks/useData";
+import {useData} from "../../hooks";
 
 const FuncUsersList = () => {
   const { data, error, isPanding } = useData(getJsonUsers);

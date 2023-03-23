@@ -1,22 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { ErrorMessage, Field } from "formik";
+import { ErrorMessage, useField } from "formik";
 import cx from "classnames";
 import styles from "./InputValid.module.scss";
 
 const InputValid = (props) => {
   const { name, ...restProps } = props;
+  const [field, meta] = useField(name);
+  const classNames = cx({
+    [styles.invalid]: meta.error && meta.touched,
+  });
   return (
     <label className={styles.label}>
       <span>{name}</span>
-      <Field name={name}>
-        {({ field, form, meta }) => {
-          const classNames = cx({
-            [styles.invalid]: meta.error && meta.touched
-          });
-          return <input className={classNames} {...field} {...restProps} />;
-        }}
-      </Field>
+      <input className={classNames} {...field} {...restProps} />
       <ErrorMessage name={name} component="div" className={styles.error} />
     </label>
   );

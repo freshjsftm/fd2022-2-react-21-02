@@ -3,7 +3,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import { UserContext, ThemeContext } from "./contexts";
 import CONSTANTS from "./constants";
-const {THEMES} = CONSTANTS;
+import { useClicker } from "./hooks";
+const { THEMES } = CONSTANTS;
 
 const App = () => {
   const [user] = useState({
@@ -15,6 +16,7 @@ const App = () => {
   return (
     <ThemeContext.Provider value={[theme, setTheme]}>
       <UserContext.Provider value={user}>
+        <p>clicker count = {useClicker()}</p>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<HomePage />} />

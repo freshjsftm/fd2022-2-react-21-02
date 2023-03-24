@@ -1,4 +1,5 @@
 import React, {useReducer} from 'react';
+import reducer from './reducer';
 const initialState = {
   fname:'',
   sname:'',
@@ -7,14 +8,7 @@ const initialState = {
   phone:'',
   age:18
 }
-const reducer = (state, action) => {
-  const {name, value} = action;
-  const newState = {
-    ...state,
-    [name]:value
-  }
-  return newState;
-}
+
 const SignUpForm = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const handleInput = ({target:{name, value}})=>{

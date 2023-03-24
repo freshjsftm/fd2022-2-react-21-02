@@ -30,10 +30,9 @@ export const getRandomUsers = (options = {}) => {
 };
 
 export const getJsonUsers = () =>
-  fetch("/data/users.json")
-  .then((res) => res.json());
-
+  fetch("/data/users.json").then((res) => res.json());
 
 export const getJsonPhones = () =>
-  fetch("/data/phones.json")
-  .then((res) => res.json());
+  fetch("/data/phones.json").then((res) => res.json());
+
+export const getChat = () => fetch("/data/chat.json").then((res) => res.json());

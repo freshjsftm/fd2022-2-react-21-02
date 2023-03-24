@@ -21,12 +21,21 @@ const App = () => {
     event.stopPropagation();
     setIsMenuOpen(true);
   };
+  const handleEnter = (event) => {
+    if (event.key === "Enter") {
+      setIsMenuOpen(true);
+    }
+  };
   return (
     <NavMenuContext.Provider value={{ isMenuOpen, setIsMenuOpen }}>
       <ThemeContext.Provider value={[theme, setTheme]}>
         <UserContext.Provider value={user}>
           <BrowserRouter>
-            <MenuOpen onClick={handleMenuOpen} />
+            <MenuOpen
+              onClick={handleMenuOpen}
+              tabIndex="0"
+              onKeyDown={handleEnter}
+            />
             <NavMenu />
             <Routes>
               <Route path="/" element={<HomePage />} />

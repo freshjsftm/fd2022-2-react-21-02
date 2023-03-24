@@ -6,7 +6,8 @@ import { NavMenuContext } from "../../contexts";
 import styles from "./NavMenu.module.scss";
 
 const NavMenu = () => {
-  const {state:{ isMenuOpen }, handleMenuClose} = useContext(NavMenuContext);
+  const {isMenuOpen, setIsMenuOpen} = useContext(NavMenuContext);
+  const handleMenuClose = ()=>{setIsMenuOpen(false)}
   const classNames = cx(styles.container, {
     [styles.open] : isMenuOpen
   });

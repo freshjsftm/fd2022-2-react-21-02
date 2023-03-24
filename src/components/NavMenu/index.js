@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useCallback } from "react";
+import React, { useContext, useEffect, useCallback, useId } from "react";
 import { NavLink } from "react-router-dom";
 import { Close } from "@mui/icons-material";
 import cx from "classnames";
@@ -6,6 +6,8 @@ import { NavMenuContext } from "../../contexts";
 import styles from "./NavMenu.module.scss";
 
 const NavMenu = () => {
+  const navMenu = useId();
+  console.log(navMenu)
   const { isMenuOpen, setIsMenuOpen } = useContext(NavMenuContext);
   const handleMenuClose = useCallback(() => {
     setIsMenuOpen(false);
@@ -15,10 +17,7 @@ const NavMenu = () => {
   });
   useEffect(() => {
     const handleClick = ({ target }) => {
-      if (
-        isMenuOpen &&
-        document.getElementById("navMenu").contains(target) === false
-      ) {
+      if (isMenuOpen && navMenu.contains(target) === false) {
         handleMenuClose();
       }
     };
@@ -26,7 +25,7 @@ const NavMenu = () => {
       if (event.key !== "Enter" && event.key !== "Tab") {
         handleMenuClose();
       }
-    }
+    };
     window.addEventListener("click", handleClick);
     window.addEventListener("keydown", handleKeyDown);
     return () => {
@@ -39,8 +38,9 @@ const NavMenu = () => {
       setIsMenuOpen(false);
     }
   };
+
   return (
-    <nav className={classNames} id="navMenu">
+    <nav className={classNames} id={navMenu}>
       <Close
         className={styles.close}
         onClick={handleMenuClose}

@@ -17,7 +17,7 @@ const NavMenu = () => {
   });
   useEffect(() => {
     const handleClick = ({ target }) => {
-      if (isMenuOpen && navMenu.contains(target) === false) {
+      if (isMenuOpen && document.getElementById(navMenu).contains(target) === false) {
         handleMenuClose();
       }
     };
@@ -31,7 +31,7 @@ const NavMenu = () => {
     return () => {
       window.removeEventListener("click", handleClick);
       window.removeEventListener("keydown", handleKeyDown);
-    };
+    }; // eslint-disable-next-line
   }, [isMenuOpen, handleMenuClose]);
   const handleEnter = (event) => {
     if (event.key === "Enter") {

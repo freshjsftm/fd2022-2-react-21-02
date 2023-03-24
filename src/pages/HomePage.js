@@ -2,8 +2,6 @@ import React, { useContext, useState, useCallback, useMemo } from "react";
 import { ThemeContext } from "../contexts";
 import Calendar from "../components/Calendar";
 import UserProfile from "../components/UserProfile";
-import FuncUsersList from "../components/FuncUsersList";
-import LogInForm from "../components/forms/LogInForm";
 import CONSTANTS from "../constants";
 
 const { THEMES } = CONSTANTS;
@@ -44,8 +42,6 @@ const HomePage = (props) => {
   return (
     <section style={inlineStyle}>
       <button onClick={handleTheme}>{isLight ? "dark" : "light"}</button>
-      <LogInForm />
-      <FuncUsersList />
       <Calendar />
       <UserProfile />
       <h3>{memoCalcSense}</h3>

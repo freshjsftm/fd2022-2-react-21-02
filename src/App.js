@@ -17,13 +17,16 @@ const App = () => {
   });
   const [theme, setTheme] = useState(THEMES.LIGHT);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const handleMenuOpen = ()=> setIsMenuOpen(true)
+  const handleMenuOpen = (event) => {
+    event.stopPropagation();
+    setIsMenuOpen(true);
+  };
   return (
-    <NavMenuContext.Provider value={{isMenuOpen, setIsMenuOpen}}>
+    <NavMenuContext.Provider value={{ isMenuOpen, setIsMenuOpen }}>
       <ThemeContext.Provider value={[theme, setTheme]}>
         <UserContext.Provider value={user}>
           <BrowserRouter>
-            <MenuOpen onClick={handleMenuOpen}/>
+            <MenuOpen onClick={handleMenuOpen} />
             <NavMenu />
             <Routes>
               <Route path="/" element={<HomePage />} />
